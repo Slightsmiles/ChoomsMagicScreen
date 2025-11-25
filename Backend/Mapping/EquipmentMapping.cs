@@ -25,7 +25,7 @@ namespace Backend.Mapping
                 {
                     Index = dto.EquipmentCategory.Index,
                     Name = dto.EquipmentCategory.Name,
-                    url = dto.EquipmentCategory.url
+                    Url = dto.EquipmentCategory.Url
                 } : new EquipmentCategoryDTO()
             };
         }

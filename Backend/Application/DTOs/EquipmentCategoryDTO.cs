@@ -7,9 +7,9 @@ namespace Backend.Application.DTOs
 {
     public class EquipmentCategoryDTO
     {
-        public string Index {get; set;}
-        public string Name {get; set;}
+        public string Index {get; set;} = "";
+        public string Name {get; set;} = "";
 
-        public string URL {get; set;}
+        public string Url {get; set;} = "";
     }
 }
