@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "SKNtcf/jRMo=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Trond\\Desktop\\projects\\ChoomsMagicScreen\\Backend\\Backend.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Trond\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.6\\microsoft.aspnetcore.openapi.9.0.6.nupkg.sha512",
+    "C:\\Users\\Trond\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
