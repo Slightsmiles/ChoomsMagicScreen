@@ -16,15 +16,28 @@ namespace Backend.Application.Services
 
         public EquipmentService(IHttpClientFactory f) => _http = f.CreateClient("DndApi");
 
-        public async Task<EquipmentListDTO> getAllEquipment()
+        public async Task<List<EquipmentListDTO>> GetAllEquipmentAsync()
         {
-            
-            var response = await _http.GetAsync("equipment");
-            if (!response.IsSuccessStatusCode)
-                return StatusCode((int)response.StatusCode);
+            // Deserializes directly into my DTO
+            var apiResponse = await _http.GetFromJsonAsync<ApiListResponse<EquipmentListDTO>>("equipment");
 
-            var json = await response.Content.ReadAsStringAsync();
-            return Content(json, "application/json");
+
+            return apiResponse?.Results ?? new List<EquipmentListDTO>();
+        }
+
+        public async Task<EquipmentDTO?> GetOneEquipmentAsync(string index)
+        {
+            try
+            {
+                var item = await _http.GetFromJsonAsync<EquipmentDTO>($"equipment/{index}");
+                Console.WriteLine(item);
+                return item;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching {index}: {ex.Message}");
+                return null;
+            }
         }
     }
 }

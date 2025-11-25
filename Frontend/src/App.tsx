@@ -7,17 +7,31 @@ function App() {
   const [count, setCount] = useState(0)
   const [items, setItems] = useState<any[]>([])
   const [error, setError] = useState<string | null>(null)
-
-  async function loadEquipment() {
+  const backendUrl: string = "http://localhost:5067/api/"
+  async function loadAllEquipment() {
     try {
-      const res = await fetch("http://localhost:5067/api/equipment") // hardcoded backend
+      const res = await fetch(backendUrl + "equipment")
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const data = await res.json()
-      setItems(data.results || [])
+      setItems(data) // <-- data is already the array
     } catch (err: any) {
       setError(err.message)
     }
   }
+
+  async function loadEquipmentByIndex() {
+    try {
+      const res = await fetch(backendUrl + "equipment/quiver")
+      if (!res.ok) throw new Error(` HTTP ${res.status}`)
+      const data = await res.json()
+      console.log(data)
+      setItems([data]) // <-- wrap single item in array so map works
+    } catch (err: any) {
+      setError(err.message)
+    }
+  }
+
+
 
   return (
     <>
@@ -38,8 +52,12 @@ function App() {
           Edit <code>src/App.tsx</code> and save to test HMR YEE
         </p>
 
-        <button onClick={loadEquipment} style={{ marginTop: '1rem' }}>
+        <button onClick={loadAllEquipment} style={{ marginTop: '1rem' }}>
           Load Equipment
+        </button>
+
+        <button onClick={loadEquipmentByIndex} style={{ marginTop: '1rem' }}>
+          Load Equipment Quiver
         </button>
 
         {error && <div style={{ color: 'red' }}>Error: {error}</div>}

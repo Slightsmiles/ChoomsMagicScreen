@@ -7,6 +7,6 @@ namespace Backend.Application.Interfaces
 {
     public interface IEquipmentService
     {
-        Task getAllEquipment();
+        Task getAllEquipmentAsync();
     }
 }
