@@ -9,9 +9,9 @@ namespace Backend.Application.DTOs
     public class EquipmentListDTO
     {
         [Required]
-        public string Index {get; set;} = "";
+        public string? Index {get; set;}
 
-        public string Name {get; set;}
+        public string? Name {get; set;}
         
     }
 }

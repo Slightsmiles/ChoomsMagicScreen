@@ -13,12 +13,12 @@ namespace Backend.Application.DTOs
         public int Id { get; set; }
 
         [Required]
-        public string Index { get; set; } = "";
+        public string? Index { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
         
         [JsonPropertyName("equipment_category")]
-        public EquipmentCategoryDTO EquipmentCategory { get; set; } = new();
+        public EquipmentCategoryDTO? EquipmentCategory { get; set; }
 
 
 

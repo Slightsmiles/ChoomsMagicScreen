@@ -19,10 +19,20 @@ namespace Backend.Application.Services
         public async Task<List<EquipmentListDTO>> GetAllEquipmentAsync()
         {
             // Deserializes directly into my DTO
-            var apiResponse = await _http.GetFromJsonAsync<ApiListResponse<EquipmentListDTO>>("equipment");
+            try
+            {
+                var apiResponse = await _http.GetFromJsonAsync<ApiListResponse<EquipmentListDTO>>("equipment");
 
 
-            return apiResponse?.Results ?? new List<EquipmentListDTO>();
+                return apiResponse?.Results ?? new List<EquipmentListDTO>();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching All Equipment: {ex.Message}");
+                return new List<EquipmentListDTO>(); // Returns empty list
+            }
+
         }
 
         public async Task<EquipmentDTO?> GetOneEquipmentAsync(string index)
@@ -30,14 +40,33 @@ namespace Backend.Application.Services
             try
             {
                 var item = await _http.GetFromJsonAsync<EquipmentDTO>($"equipment/{index}");
-                Console.WriteLine(item);
                 return item;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error fetching {index}: {ex.Message}");
-                return null;
+                return DummyEquipment(); //Returns null object
             }
         }
+
+
+        private EquipmentDTO DummyEquipment()
+        {
+            return new EquipmentDTO
+            {
+                Name = "Error",
+                Index = "Error",
+                EquipmentCategory = new EquipmentCategoryDTO()
+                {
+                    Index = "Error",
+                    Name = "Error",
+                    Url = "Error"
+                }
+            };
+        }
     }
+
+
+
 }
+
