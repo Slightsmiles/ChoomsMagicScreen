@@ -11,7 +11,6 @@ function App() {
   const [count, setCount] = useState(0)
   const [items, setItems] = useState<any[]>([])
   const [error, setError] = useState<string | null>(null)
-  const [penis, setPenis] = useState("");
   const backendUrl: string = "http://localhost:5067/api/"
   async function loadAllEquipment() {
     try {
@@ -75,7 +74,6 @@ function App() {
       <div>
         <h1>Enter the item you want:</h1>
         <SearchField onSearch={(q) => console.log("Search for:", q)} />
-        <p>You typed: {penis}</p>
       </div>
     </>
   )
