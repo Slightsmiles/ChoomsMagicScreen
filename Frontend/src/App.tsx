@@ -2,11 +2,16 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import InputField from './components/InputField/InputField'
+
+import SearchField from './components/SearchField/SearchField'
+
 
 function App() {
   const [count, setCount] = useState(0)
   const [items, setItems] = useState<any[]>([])
   const [error, setError] = useState<string | null>(null)
+  const [penis, setPenis] = useState("");
   const backendUrl: string = "http://localhost:5067/api/"
   async function loadAllEquipment() {
     try {
@@ -19,9 +24,9 @@ function App() {
     }
   }
 
-  async function loadEquipmentByIndex() {
+  async function loadEquipmentByIndex(index: string) {
     try {
-      const res = await fetch(backendUrl + "equipment/quiver")
+      const res = await fetch(backendUrl + "equipment/" + index)
       if (!res.ok) throw new Error(` HTTP ${res.status}`)
       const data = await res.json()
       console.log(data)
@@ -30,6 +35,7 @@ function App() {
       setError(err.message)
     }
   }
+
 
 
 
@@ -56,9 +62,7 @@ function App() {
           Load Equipment
         </button>
 
-        <button onClick={loadEquipmentByIndex} style={{ marginTop: '1rem' }}>
-          Load Equipment Quiver
-        </button>
+        <button onClick={() => void loadEquipmentByIndex("quiver")}>Load Quiver</button>
 
         {error && <div style={{ color: 'red' }}>Error: {error}</div>}
 
@@ -68,9 +72,11 @@ function App() {
           ))}
         </ul>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div>
+        <h1>Enter the item you want:</h1>
+        <SearchField onSearch={(q) => console.log("Search for:", q)} />
+        <p>You typed: {penis}</p>
+      </div>
     </>
   )
 }
