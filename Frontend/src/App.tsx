@@ -5,13 +5,15 @@ import './App.css'
 import InputField from './components/InputField/InputField'
 
 import SearchField from './components/SearchField/SearchField'
-
+import EquipmentResult from './components/EquipmentResult/EquipmentResult'
+import EquipmentSearchPage from './components/EquipmentSearchPage/EquipmentSearchPage'
 
 function App() {
   const [count, setCount] = useState(0)
   const [items, setItems] = useState<any[]>([])
   const [error, setError] = useState<string | null>(null)
   const backendUrl: string = "http://localhost:5067/api/"
+  
   async function loadAllEquipment() {
     try {
       const res = await fetch(backendUrl + "equipment")
@@ -40,15 +42,7 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -71,10 +65,9 @@ function App() {
           ))}
         </ul>
       </div>
-      <div>
-        <h1>Enter the item you want:</h1>
-        <SearchField onSearch={(q) => console.log("Search for:", q)} />
-      </div>
+    <div className="App">
+      <EquipmentSearchPage />
+    </div>
     </>
   )
 }
