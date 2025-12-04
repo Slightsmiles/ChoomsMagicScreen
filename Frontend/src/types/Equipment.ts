@@ -14,3 +14,9 @@ export interface EquipmentItem {
 export interface EquipmentResultProps {
   item: EquipmentItem | null;
 }
+
+export interface Cost {
+  quantity: number,
+  unit: string
+
+}

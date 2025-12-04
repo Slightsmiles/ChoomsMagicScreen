@@ -2,11 +2,18 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import InputField from './components/InputField/InputField'
 
+import InputField from './components/InputField/InputField'
 import SearchField from './components/SearchField/SearchField'
 import EquipmentResult from './components/EquipmentResult/EquipmentResult'
 import EquipmentSearchPage from './components/EquipmentSearchPage/EquipmentSearchPage'
+
+
+import Droppable from './hooks/Droppable'
+import  Draggable  from './hooks/Draggable'
+import { DndContext } from '@dnd-kit/core'
+import EquipmentSlot from './components/EquipmentSlot/EquipmentSlot'
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -44,12 +51,6 @@ function App() {
     <>
 
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR YEE
-        </p>
 
         <button onClick={loadAllEquipment} style={{ marginTop: '1rem' }}>
           Load Equipment
@@ -68,6 +69,12 @@ function App() {
     <div className="App">
       <EquipmentSearchPage />
     </div>
+        <div>
+              <DndContext>
+      <Droppable> <EquipmentSlot type="head" id="head"></EquipmentSlot></Droppable>
+      <Draggable> i am a helmet</Draggable>
+    </DndContext>
+        </div>
     </>
   )
 }
