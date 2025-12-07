@@ -1,0 +1,16 @@
+.slot {
+  border: 1px solid gray;
+  padding: 8px;
+  min-height: 40px;
+  min-width: 20px;
+  color: black; /* replaces textEmphasisColor */
+}
+
+.slot p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.slotItem {
+  margin-top: 4px;
+}

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import type { DraggableItem } from "../../types/DraggableItem";
 import { useDroppable } from "@dnd-kit/core";
+import styles from "./EquipmentSlot.module.css";
 
 interface EquipmentSlotProps { //misc represents tomes and other niche items
     type: "head" | "eyes" | "neck" | "weapon" | "chest" | "ring" | "arms" | "shoulder" | "torso" | "body" | "waist" | "feet" | "misc";
@@ -23,19 +24,11 @@ export default function EquipmentSlot({ type, id, item }: EquipmentSlotProps) {
     return (
         <div
             ref={setNodeRef}
-            style={{
-                textEmphasisColor: "black",
-                border: "1px solid gray",
-                padding: "8px",
-                minHeight: "40px",
-                minWidth: "20px",
-                backgroundColor: getBackgroundColor()
-
-            }}
+            className={styles.slot}
+            style={{ backgroundColor: getBackgroundColor() }}
         >
             <p>Slot type: {type}</p>
-            {item ? <div>{item.name}</div> : "Drop here"}
-
+            {item ? <div className={styles.slotItem}>{item.name}</div> : "Drop here"}
         </div>
     );
 }

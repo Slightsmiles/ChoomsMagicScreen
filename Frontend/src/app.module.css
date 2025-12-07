@@ -1,0 +1,9 @@
+/* App.module.css */
+.container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  height: 100vh;
+  padding: 16px;
+  box-sizing: border-box;
+}
