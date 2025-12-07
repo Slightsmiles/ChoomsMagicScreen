@@ -11,9 +11,9 @@ function Draggable(props: any) {
 
   
   return (
-    <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      {props.children}
-    </button>
+    <><button ref={setNodeRef} style={style} {...listeners} {...attributes}>
+          {props.children}
+      </button></>
   );
 }
 

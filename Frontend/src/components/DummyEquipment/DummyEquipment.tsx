@@ -41,6 +41,13 @@ export function DummyEquipment({ draggables }: DummyEquipmentProps) {
                         item={draggables.find(item => item.parent === slot) || null}
                     />
                 ))}
+                {/* Draggables for equipped items */}
+                {EquipmentSlots.map(slot => {
+                    const item = draggables.find(d => d.parent === slot);
+                    return item ? (
+                        <Draggable key={item.id} id={item.id} item={item} />
+                    ) : null;
+                })}
             </div>
         </div>
     );

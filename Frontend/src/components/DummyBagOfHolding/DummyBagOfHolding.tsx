@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { DraggableItem } from "../../types/DraggableItem";
 import EquipmentSlot from "../EquipmentSlot/EquipmentSlot";
+import Draggable from "../../hooks/Draggable";
 
 
 interface DummyBagOfHoldingProps {
@@ -18,7 +19,7 @@ export function DummyBagOfHolding({draggables}: DummyBagOfHoldingProps) {
         <div
             style={{
                 display: "grid",
-                gridTemplateColumns: `repeat(${cols}, 60px)`, // 60px per column
+                gridTemplateColumns: `repeat(${cols}, 60px)`, // 60px per column (love me some magic numbering)
                 gridTemplateRows: `repeat(${rows}, 60px)`,
                 gap: "2px"
             }}
@@ -31,6 +32,14 @@ export function DummyBagOfHolding({draggables}: DummyBagOfHoldingProps) {
                     item={draggables.find(item => item.parent === slot) || null}
                 />
             ))}
+
+            {/* used for generating draggable items already occupying a slot */}
+            {equipmentSlots.map(slot => {
+                    const item = draggables.find(d => d.parent === slot);
+                    return item ? (
+                        <Draggable key={item.id} id={item.id} item={item} />
+                    ) : null;
+                })}
         </div>
 
     )
