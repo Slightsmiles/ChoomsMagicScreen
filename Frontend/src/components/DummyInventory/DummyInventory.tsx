@@ -4,6 +4,7 @@ import {Droppable} from "../../hooks/Droppable";
 import { DndContext, type DragEndEvent } from "@dnd-kit/core";
 export function DummyInventory() {
   const EquipmentSlots = ["head" , "eyes" , "neck" , "weapon" , "chest" , "ring" , "arms" , "shoulder" , "torso" , "body" , "waist" , "feet" , "misc"];
+  
   const [parent, setParent] = useState(null);
   const draggableMarkup = (
     <Draggable id="head">Drag me</Draggable>
@@ -15,7 +16,7 @@ export function DummyInventory() {
   return (
     <DndContext onDragEnd={handleDragEnd}>
       {parent === null ? draggableMarkup : null}
-        
+      
       {EquipmentSlots.map((id) => (
         // We updated the Droppable component so it would accept an `id`
         // prop and pass it to `useDroppable`
@@ -25,6 +26,9 @@ export function DummyInventory() {
       ))}
     </DndContext>
   );
+
+
+
 
   function handleDragEnd(event: any) {
     const {over} = event;
