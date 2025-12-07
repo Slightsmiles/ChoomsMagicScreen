@@ -11,6 +11,7 @@ function EquipmentSlot({type}: EquipmentSlotProps) {
     const [isFilled, setFilled] = useState(false);
 
 
+    const [item, setItem] = useState<React.ReactNode | null>(null);
 
     return (
         <div>

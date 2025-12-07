@@ -9,17 +9,17 @@ import EquipmentResult from './components/EquipmentResult/EquipmentResult'
 import EquipmentSearchPage from './components/EquipmentSearchPage/EquipmentSearchPage'
 
 
-import Droppable from './hooks/Droppable'
+import {Droppable} from './hooks/Droppable'
 import  Draggable  from './hooks/Draggable'
 import { DndContext } from '@dnd-kit/core'
 import EquipmentSlot from './components/EquipmentSlot/EquipmentSlot'
 
+import { DummyInventory } from './components/DummyInventory/DummyInventory'
 
 function App() {
-  const [count, setCount] = useState(0)
   const [items, setItems] = useState<any[]>([])
   const [error, setError] = useState<string | null>(null)
-  const backendUrl: string = "http://localhost:5067/api/"
+  const backendUrl: string = "http://localhost:5067/api/" //rememberoo change this
   
   async function loadAllEquipment() {
     try {
@@ -70,10 +70,7 @@ function App() {
       <EquipmentSearchPage />
     </div>
         <div>
-              <DndContext>
-      <Droppable> <EquipmentSlot type="head" id="head"></EquipmentSlot></Droppable>
-      <Draggable> i am a helmet</Draggable>
-    </DndContext>
+          <DummyInventory></DummyInventory>
         </div>
     </>
   )
