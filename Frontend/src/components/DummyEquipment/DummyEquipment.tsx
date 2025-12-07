@@ -3,7 +3,6 @@ import Draggable from "../../hooks/Draggable";
 import { Droppable } from "../../hooks/Droppable";
 import { DndContext, type DragEndEvent } from "@dnd-kit/core";
 import { createDraggable } from "../../types/DraggableItem";
-
 import type { DraggableItem } from "../../types/DraggableItem";
 import type { InventoryState } from "../../types/InventoryState";
 import EquipmentSlot from "../EquipmentSlot/EquipmentSlot";
