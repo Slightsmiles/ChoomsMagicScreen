@@ -1,34 +1,42 @@
-import { useState } from "react"
-import type { DraggableItem } from "../../types/DraggableItem";
 import { useDroppable } from "@dnd-kit/core";
+import type { DraggableItem } from "../../types/DraggableItem";
+import DraggableItemView from "../Item/DraggableItemView";
 import styles from "./EquipmentSlot.module.css";
+import itemStyles from "../Item/DraggableItemView.module.css"
+import Draggable from "../../hooks/Draggable";
 
-interface EquipmentSlotProps { //misc represents tomes and other niche items
-    type: "head" | "eyes" | "neck" | "weapon" | "chest" | "ring" | "arms" | "shoulder" | "torso" | "body" | "waist" | "feet" | "misc";
-    id: string;
-    item: DraggableItem | null;
+interface EquipmentSlotProps {
+  type: "head" | "eyes" | "neck" | "weapon" | "chest" | "ring" | "arms" | "shoulder" | "torso" | "body" | "waist" | "feet" | "misc";
+  id: string;
+  item: DraggableItem | null;
+  onUpdateItem: (id: string, updates: Partial<DraggableItem>) => void;
 }
 
+export default function EquipmentSlot({ type, id, item, onUpdateItem }: EquipmentSlotProps) {
+  const { isOver, setNodeRef } = useDroppable({ id });
+
+  const backgroundColor = item ? "lightblue" : isOver ? "lightgreen" : "white";
 
 
+  return (
+    <div
+      ref={setNodeRef}
+      className={styles.slot}
+      style={{ backgroundColor }}
+    >
+      <p>Slot type: {type}</p>
 
-export default function EquipmentSlot({ type, id, item }: EquipmentSlotProps) {
-    const { isOver, setNodeRef } = useDroppable({ id });
+      {/* Conditionally render DraggableItemView if there is an item */}
+      {item && (
+        <Draggable id={item.id}>
+        <DraggableItemView
+          item={item}
+          onUpdateItem={onUpdateItem}
+          className={itemStyles.slotItemOverlay} // absolute positioning over slot
+        /></Draggable>
+      )}
 
-
-    function getBackgroundColor() {
-        if (item) return "lightblue";
-        if (isOver) return "lightgreen";
-        return "white";
-    }
-    return (
-        <div
-            ref={setNodeRef}
-            className={styles.slot}
-            style={{ backgroundColor: getBackgroundColor() }}
-        >
-            <p>Slot type: {type}</p>
-            {item ? <div className={styles.slotItem}>{item.name}</div> : "Drop here"}
-        </div>
-    );
+      {!item && "Drop here"}
+    </div>
+  );
 }

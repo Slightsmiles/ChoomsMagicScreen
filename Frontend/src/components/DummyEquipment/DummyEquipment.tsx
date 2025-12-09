@@ -7,6 +7,7 @@ import type { DraggableItem } from "../../types/DraggableItem";
 import type { InventoryState } from "../../types/InventoryState";
 import EquipmentSlot from "../EquipmentSlot/EquipmentSlot";
 import DraggableItemView from "../Item/DraggableItemView";
+import itemStyles from '../Item/DraggableItemView.module.css'
 
 interface DummyEquipmentProps {
     draggables: DraggableItem[];
@@ -30,6 +31,7 @@ export function DummyEquipment({ draggables, onUpdateItem }: DummyEquipmentProps
                             <DraggableItemView
                                 item={item}
                                 onUpdateItem={onUpdateItem}
+                                className={itemStyles.item}
                             />
                         </Draggable>
                     ))}
@@ -43,20 +45,10 @@ export function DummyEquipment({ draggables, onUpdateItem }: DummyEquipmentProps
                         id={slot}
                         type={slot}
                         item={draggables.find(item => item.parent === slot) || null}
+                        onUpdateItem={onUpdateItem}
                     />
                 ))}
-                {/* Draggables for equipped items */}
-                {EquipmentSlots.map(slot => {
-                    const item = draggables.find(d => d.parent === slot);
-                    return item ? (
-                        <Draggable key={item.id} id={item.id}>
-                            <DraggableItemView
-                                item={item}
-                                onUpdateItem={onUpdateItem}
-                            />
-                        </Draggable>
-                    ) : null;
-                })}
+
 
             </div>
         </div>

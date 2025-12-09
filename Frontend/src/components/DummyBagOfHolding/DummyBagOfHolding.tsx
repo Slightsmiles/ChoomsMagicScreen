@@ -32,6 +32,7 @@ export function DummyBagOfHolding({ draggables, onUpdateItem }: DummyBagOfHoldin
           id={slot}
           type="misc"
           item={draggables.find(item => item.parent === slot) || null}
+          onUpdateItem={onUpdateItem}
         />
       ))}
 

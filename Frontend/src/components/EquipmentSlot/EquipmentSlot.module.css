@@ -1,17 +1,19 @@
 .slot {
+  position: relative;
   border: 1px solid gray;
   padding: 8px;
   min-height: 40px;
   min-width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: black; /* replaces textEmphasisColor */
+  z-index: 0;
+  overflow: visible;
 }
 
 .slot p {
   margin: 0;
   font-size: 0.9rem;
-}
-
-.slotItem {
-  margin-top: 4px;
 }
 
