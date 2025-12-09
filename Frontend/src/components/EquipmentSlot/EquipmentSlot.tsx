@@ -24,7 +24,7 @@ export default function EquipmentSlot({ type, id, item, onUpdateItem }: Equipmen
       className={styles.slot}
       style={{ backgroundColor }}
     >
-      <p>Slot type: {type}</p>
+      {!item && <p>Slot type: {type}</p>}
 
       {/* Conditionally render DraggableItemView if there is an item */}
       {item && (
@@ -35,8 +35,6 @@ export default function EquipmentSlot({ type, id, item, onUpdateItem }: Equipmen
           className={itemStyles.slotItemOverlay} // absolute positioning over slot
         /></Draggable>
       )}
-
-      {!item && "Drop here"}
     </div>
   );
 }

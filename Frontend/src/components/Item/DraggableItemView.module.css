@@ -1,27 +1,27 @@
 /* DraggableItemView.module.css */
 .item {
   position: relative; /* or absolute only if inside a positioned container */
-  width: 50px;        /* fixed size or dynamic via props */
-  height: 50px;
+  min-width: 20px;        /* fixed size or dynamic via props */
+  min-height: 20px;
+  max-width: 40px;
+  padding: 10px;
   z-index: 10;        /* to float above other siblings */
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  
+  box-sizing: border-box; /* ensure padding included in size */
 }
-.slotItemOverlay {
-  position: absolute;
-  width: 100%;  /* match slot size */
+.slotItemOverlay .item {
+  width: 100%;
   height: 100%;
-  z-index: 10;
+  margin: 0;           /* remove offset */
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  border: 1px solid gray;
 }
-
 .hovered {
   transform: scale(1.1);          /* slightly larger on hover */
   box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* subtle shadow */
