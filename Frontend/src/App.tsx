@@ -120,7 +120,12 @@ function App() {
             )
           }
         />
-        <DummyBagOfHolding draggables={draggables} />
+        <DummyBagOfHolding draggables={draggables} 
+         onUpdateItem={(id, updates) =>
+            setDraggables(prev =>
+              prev.map(item => (item.id === id ? { ...item, ...updates } : item))
+            )
+          }/>
 
       </DndContext>
 

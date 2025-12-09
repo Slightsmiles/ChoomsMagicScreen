@@ -12,7 +12,7 @@ interface DummyEquipmentProps {
     draggables: DraggableItem[];
     onUpdateItem: (id: string, updates: Partial<DraggableItem>) => void;
 }
-export function DummyEquipment({ draggables, onUpdateItem  }: DummyEquipmentProps) {
+export function DummyEquipment({ draggables, onUpdateItem }: DummyEquipmentProps) {
     const EquipmentSlots = ["head", "eyes", "neck", "weapon", "chest", "ring", "arms", "shoulder", "torso", "body", "waist", "feet", "misc"] as const;
 
 
@@ -49,9 +49,15 @@ export function DummyEquipment({ draggables, onUpdateItem  }: DummyEquipmentProp
                 {EquipmentSlots.map(slot => {
                     const item = draggables.find(d => d.parent === slot);
                     return item ? (
-                        <Draggable key={item.id} id={item.id} item={item} />
+                        <Draggable key={item.id} id={item.id}>
+                            <DraggableItemView
+                                item={item}
+                                onUpdateItem={onUpdateItem}
+                            />
+                        </Draggable>
                     ) : null;
                 })}
+
             </div>
         </div>
     );
