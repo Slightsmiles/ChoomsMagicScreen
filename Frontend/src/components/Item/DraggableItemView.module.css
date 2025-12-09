@@ -1,10 +1,10 @@
 /* DraggableItemView.module.css */
 .item {
-  position: relative; /* or absolute only if inside a positioned container */
-  min-width: 20px;        /* fixed size or dynamic via props */
-  min-height: 20px;
-  max-width: 40px;
-  padding: 10px;
+  position: relative; 
+  min-width: 20px;        /*Magic numbering */
+  min-height: 20px;     /*Magic numbering */
+  max-width: 40px;    /*Magic numbering */
+  padding: 10px;      
   z-index: 10;        /* to float above other siblings */
   display: flex;
   align-items: center;
@@ -23,7 +23,7 @@
   text-align: center;
 }
 .hovered {
-  transform: scale(1.1);          /* slightly larger on hover */
+  transform: scale(1.1);         
   box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* subtle shadow */
   cursor: grab;
 }
