@@ -15,3 +15,5 @@ export interface InventoryState { //Might change from equipmentItem
   feet: EquipmentItem | null;
   misc: EquipmentItem | null;
 }
+
+export type EquipmentSlotId = keyof InventoryState;

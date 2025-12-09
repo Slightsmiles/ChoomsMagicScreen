@@ -74,13 +74,13 @@ function App() {
     const isBagSlot = slotId.startsWith("invSlot-");
     // If it's an equipment slot, enforce type match
     if (!isBagSlot && draggedItem.slot !== slotId) return;
-
+    const slotKey = slotId as keyof InventoryState;
     //Updates parent
     setDraggables(prev =>
       prev.map(item =>
         item.id === active.id
-          ? { ...item, parent: slotId } // moving dragged item into slot
-          : item.parent === slotId
+          ? { ...item, parent: slotKey } // moving dragged item into slot
+          : item.parent === slotKey
             ? { ...item, parent: null } // move existing item out
             : item
       )
@@ -112,7 +112,14 @@ function App() {
         <EquipmentSearchPage />
       </div>
       <DndContext onDragEnd={handleDragEnd}>
-        <DummyEquipment draggables={draggables} />
+        <DummyEquipment
+          draggables={draggables}
+          onUpdateItem={(id, updates) =>
+            setDraggables(prev =>
+              prev.map(item => (item.id === id ? { ...item, ...updates } : item))
+            )
+          }
+        />
         <DummyBagOfHolding draggables={draggables} />
 
       </DndContext>

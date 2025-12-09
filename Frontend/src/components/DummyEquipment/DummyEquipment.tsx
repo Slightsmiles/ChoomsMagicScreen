@@ -6,11 +6,13 @@ import { createDraggable } from "../../types/DraggableItem";
 import type { DraggableItem } from "../../types/DraggableItem";
 import type { InventoryState } from "../../types/InventoryState";
 import EquipmentSlot from "../EquipmentSlot/EquipmentSlot";
+import DraggableItemView from "../Item/DraggableItemView";
 
 interface DummyEquipmentProps {
     draggables: DraggableItem[];
+    onUpdateItem: (id: string, updates: Partial<DraggableItem>) => void;
 }
-export function DummyEquipment({ draggables }: DummyEquipmentProps) {
+export function DummyEquipment({ draggables, onUpdateItem  }: DummyEquipmentProps) {
     const EquipmentSlots = ["head", "eyes", "neck", "weapon", "chest", "ring", "arms", "shoulder", "torso", "body", "waist", "feet", "misc"] as const;
 
 
@@ -25,7 +27,10 @@ export function DummyEquipment({ draggables }: DummyEquipmentProps) {
                     .filter(item => item.parent === null)
                     .map(item => (
                         <Draggable key={item.id} id={item.id}>
-                            {item.name}
+                            <DraggableItemView
+                                item={item}
+                                onUpdateItem={onUpdateItem}
+                            />
                         </Draggable>
                     ))}
             </div>
