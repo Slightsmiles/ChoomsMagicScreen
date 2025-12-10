@@ -4,19 +4,20 @@ import DraggableItemView from "../Item/DraggableItemView";
 import styles from "./EquipmentSlot.module.css";
 import itemStyles from "../Item/DraggableItemView.module.css"
 import Draggable from "../../hooks/Draggable";
+import type { EquipmentSlotId } from "../../types/EquipmentState";
 
 interface EquipmentSlotProps {
-  type: "head" | "eyes" | "neck" | "weapon" | "chest" | "ring" | "arms" | "shoulder" | "torso" | "body" | "waist" | "feet" | "misc";
+  slotId: EquipmentSlotId
   id: string;
   item: DraggableItem | null;
   onUpdateItem: (id: string, updates: Partial<DraggableItem>) => void;
 }
 
-export default function EquipmentSlot({ type, id, item, onUpdateItem }: EquipmentSlotProps) {
+export default function EquipmentSlot({ slotId: type, id, item, onUpdateItem }: EquipmentSlotProps) {
   const { isOver, setNodeRef } = useDroppable({ id });
 
   const backgroundColor = item ? "lightblue" : isOver ? "lightgreen" : "white";
-
+  
 
   return (
     <div

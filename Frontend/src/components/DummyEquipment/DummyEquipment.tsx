@@ -4,17 +4,18 @@ import { Droppable } from "../../hooks/Droppable";
 import { DndContext, type DragEndEvent } from "@dnd-kit/core";
 import { createDraggable } from "../../types/DraggableItem";
 import type { DraggableItem } from "../../types/DraggableItem";
-import type { InventoryState } from "../../types/InventoryState";
+import type { EquipmentState } from "../../types/EquipmentState";
 import EquipmentSlot from "../EquipmentSlot/EquipmentSlot";
 import DraggableItemView from "../Item/DraggableItemView";
 import itemStyles from '../Item/DraggableItemView.module.css'
 
+import { EquipmentSlots } from "../../types/EquipmentSlots";
 interface DummyEquipmentProps {
     draggables: DraggableItem[];
     onUpdateItem: (id: string, updates: Partial<DraggableItem>) => void;
 }
 export function DummyEquipment({ draggables, onUpdateItem }: DummyEquipmentProps) {
-    const EquipmentSlots = ["head", "eyes", "neck", "weapon", "chest", "ring", "arms", "shoulder", "torso", "body", "waist", "feet", "misc"] as const;
+
 
 
 
@@ -39,12 +40,12 @@ export function DummyEquipment({ draggables, onUpdateItem }: DummyEquipmentProps
 
             <div>
                 {/* Equipment slots */}
-                {EquipmentSlots.map(slot => (
+                {EquipmentSlots.map((slot) => (
                     <EquipmentSlot
-                        key={slot}
-                        id={slot}
-                        type={slot}
-                        item={draggables.find(item => item.parent === slot) || null}
+                        key={slot.slotId}
+                        id={slot.slotId}
+                        slotId={slot.slotType}
+                        item={draggables.find(item => item.parent === slot.slotId) || null}
                         onUpdateItem={onUpdateItem}
                     />
                 ))}

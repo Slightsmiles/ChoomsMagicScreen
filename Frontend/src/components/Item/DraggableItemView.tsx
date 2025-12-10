@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { DraggableItem } from "../../types/DraggableItem";
-import type { EquipmentSlotId } from "../../types/InventoryState";
+import type { EquipmentSlotId } from "../../types/EquipmentState";
 import styles from "./DraggableItemView.module.css"
 interface DraggableItemViewProps {
   item: DraggableItem;

@@ -1,6 +1,6 @@
 import type { EquipmentItem } from "./Equipment";
 
-export interface InventoryState { //Might change from equipmentItem
+export interface EquipmentState { //Might change from equipmentItem
   head: EquipmentItem | null;
   eyes: EquipmentItem | null;
   neck: EquipmentItem | null;
@@ -14,6 +14,7 @@ export interface InventoryState { //Might change from equipmentItem
   waist: EquipmentItem | null;
   feet: EquipmentItem | null;
   misc: EquipmentItem | null;
+  bag: EquipmentItem | null; //This should be generic item
 }
 
-export type EquipmentSlotId = keyof InventoryState;
+export type EquipmentSlotId = keyof EquipmentState;

@@ -2,7 +2,7 @@ import EquipmentSlot from "../EquipmentSlot/EquipmentSlot";
 import DraggableItemView from "../Item/DraggableItemView";
 import Draggable from "../../hooks/Draggable";
 import type { DraggableItem } from "../../types/DraggableItem";
-import type { EquipmentSlotId } from "../../types/InventoryState";
+import type { EquipmentSlotId } from "../../types/EquipmentState";
 
 interface DummyBagOfHoldingProps {
   draggables: DraggableItem[];
@@ -30,7 +30,7 @@ export function DummyBagOfHolding({ draggables, onUpdateItem }: DummyBagOfHoldin
         <EquipmentSlot
           key={slot}
           id={slot}
-          type="misc"
+          slotId="bag"
           item={draggables.find(item => item.parent === slot) || null}
           onUpdateItem={onUpdateItem}
         />

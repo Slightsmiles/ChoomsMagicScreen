@@ -16,8 +16,9 @@ import EquipmentSlot from './components/EquipmentSlot/EquipmentSlot'
 
 import { DummyEquipment } from './components/DummyEquipment/DummyEquipment'
 import { DummyBagOfHolding } from './components/DummyBagOfHolding/DummyBagOfHolding'
-import type { InventoryState } from './types/InventoryState'
+import type { EquipmentState } from './types/EquipmentState'
 import type { DraggableItem } from './types/DraggableItem'
+import { EquipmentSlots } from './types/EquipmentSlots'
 
 function App() {
   const [items, setItems] = useState<any[]>([])
@@ -57,35 +58,34 @@ function App() {
   }
 
 
-  function handleDragEnd(event: DragEndEvent) {
-    const { over, active } = event;
-    if (!over) return;
+function handleDragEnd(event: DragEndEvent) {
+  const { over, active } = event;
+  if (!over) return;
 
-    const slotId = String(over.id);
-    const slotFilled = draggables.some(item => item.parent === slotId);
-    if (slotFilled) {
+  const slotId = String(over.id);
+  const isBagSlot = slotId.startsWith("invSlot-");
+  const slot = EquipmentSlots.find(s => s.slotId === slotId);
+  if (!slot && !isBagSlot) return;
 
-    }
-    // Find the dragged item
-    const draggedItem = draggables.find(item => item.id === active.id);
-    if (!draggedItem) return;
+  const draggedItem = draggables.find(item => item.id === active.id);
+  if (!draggedItem) return;
 
-    // Enforce that the item's slot matches the target (breaks with bagofholding current)
-    const isBagSlot = slotId.startsWith("invSlot-");
-    // If it's an equipment slot, enforce type match
-    if (!isBagSlot && draggedItem.slot !== slotId) return;
-    const slotKey = slotId as keyof InventoryState;
-    //Updates parent
-    setDraggables(prev =>
-      prev.map(item =>
-        item.id === active.id
-          ? { ...item, parent: slotKey } // moving dragged item into slot
-          : item.parent === slotKey
-            ? { ...item, parent: null } // move existing item out
-            : item
-      )
-    );
-  }
+
+
+  // Enforce type match for equipment slots
+  if (!isBagSlot && draggedItem.slot !== slot.slotType) return;
+
+  setDraggables(prev =>
+    prev.map(item =>
+      item.id === active.id
+        ? { ...item, parent: slotId }       // move dragged item into slot
+        : item.parent === slotId
+          ? { ...item, parent: null }       // clear previous occupant
+          : item
+    )
+  );
+}
+
 
 
 
