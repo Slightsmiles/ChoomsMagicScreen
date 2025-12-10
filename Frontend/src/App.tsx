@@ -58,33 +58,34 @@ function App() {
   }
 
 
-function handleDragEnd(event: DragEndEvent) {
-  const { over, active } = event;
-  if (!over) return;
+  function handleDragEnd(event: DragEndEvent) {
+    const { over, active } = event;
+    if (!over) return;
 
-  const slotId = String(over.id);
-  const isBagSlot = slotId.startsWith("invSlot-");
-  const slot = EquipmentSlots.find(s => s.slotId === slotId);
-  if (!slot && !isBagSlot) return;
+    const slotId = String(over.id);
 
-  const draggedItem = draggables.find(item => item.id === active.id);
-  if (!draggedItem) return;
+    const draggedItem = draggables.find(item => item.id === active.id);
+    if (!draggedItem) return;
 
+    // Normalize drop target: equipment slot or bag slot. Change this if a new type of inventory is created
+    const dropTarget =
+      EquipmentSlots.find(s => s.slotId === slotId) || { slotId, slotType: "bag" as const };
 
+    // Enforce type compatibility for equipment slots
+    if (dropTarget.slotType !== "bag" && draggedItem.slot !== dropTarget.slotType) return;
 
-  // Enforce type match for equipment slots
-  if (!isBagSlot && draggedItem.slot !== slot.slotType) return;
+    // Updates the parent: move dragged item into slot, clear existing occupant if any
+    setDraggables(prev =>
+      prev.map(item =>
+        item.id === draggedItem.id
+          ? { ...item, parent: slotId }
+          : item.parent === slotId
+            ? { ...item, parent: null }
+            : item
+      )
+    );
+  }
 
-  setDraggables(prev =>
-    prev.map(item =>
-      item.id === active.id
-        ? { ...item, parent: slotId }       // move dragged item into slot
-        : item.parent === slotId
-          ? { ...item, parent: null }       // clear previous occupant
-          : item
-    )
-  );
-}
 
 
 
@@ -120,12 +121,12 @@ function handleDragEnd(event: DragEndEvent) {
             )
           }
         />
-        <DummyBagOfHolding draggables={draggables} 
-         onUpdateItem={(id, updates) =>
+        <DummyBagOfHolding draggables={draggables}
+          onUpdateItem={(id, updates) =>
             setDraggables(prev =>
               prev.map(item => (item.id === id ? { ...item, ...updates } : item))
             )
-          }/>
+          } />
 
       </DndContext>
 
