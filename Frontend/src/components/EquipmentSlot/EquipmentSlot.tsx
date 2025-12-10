@@ -7,9 +7,9 @@ import Draggable from "../../hooks/Draggable";
 import type { EquipmentSlotId } from "../../types/EquipmentState";
 
 interface EquipmentSlotProps {
-  slotId: EquipmentSlotId
-  id: string;
-  item: DraggableItem | null;
+  slotId: EquipmentSlotId // Identifier for slotType ("head, "weapon", "ring")
+  id: string;  // Unique identifier
+  item: DraggableItem | null; // Contained item
   onUpdateItem: (id: string, updates: Partial<DraggableItem>) => void;
 }
 
@@ -25,7 +25,8 @@ export default function EquipmentSlot({ slotId: type, id, item, onUpdateItem }: 
       className={styles.slot}
       style={{ backgroundColor }}
     >
-      {!item && <p>Slot type: {type}</p>}
+     {/*Condtionally renders the slot type if no item is present*/}
+      {!item && <p>{id.startsWith("invSlot") ? "bag slot" : id + " slot"}</p>} 
 
       {/* Conditionally render DraggableItemView if there is an item */}
       {item && (

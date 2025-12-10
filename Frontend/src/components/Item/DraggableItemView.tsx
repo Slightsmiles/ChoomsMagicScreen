@@ -9,15 +9,15 @@ interface DraggableItemViewProps {
   className?: string;
 }
 
-function DraggableItemView({ item, onUpdateItem, className }: DraggableItemViewProps) {
+function DraggableItemView({ item, className }: DraggableItemViewProps) {
   const [isHovered, setHovered] = useState(false);
 
   return (
     <div
       draggable
-      onDragEnd={() => onUpdateItem(item.id, { parent: "head" })} // replace "head" dynamically later
       className={`${className} ${isHovered ? styles.hovered : ""}`}
       onMouseEnter={() => setHovered(true)}
+      onMouseDown={() => console.log(item.parent)}
       onMouseLeave={() => setHovered(false)}
     >
       {item.name}

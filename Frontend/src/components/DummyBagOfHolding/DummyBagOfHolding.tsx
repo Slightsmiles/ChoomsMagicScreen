@@ -14,7 +14,7 @@ export function DummyBagOfHolding({ draggables, onUpdateItem }: DummyBagOfHoldin
   const cols = 12;
 
   // Generate slot IDs (example: invSlot-0, invSlot-1, …)
-  const equipmentSlots = Array.from({ length: rows * cols }, (_, i) => `invSlot-${i}` as EquipmentSlotId);
+  const bagSlots = Array.from({ length: rows * cols }, (_, i) => `invSlot-${i}` as EquipmentSlotId);
 
   return (
     <div
@@ -26,7 +26,7 @@ export function DummyBagOfHolding({ draggables, onUpdateItem }: DummyBagOfHoldin
       }}
     >
       {/* Render empty slots */}
-      {equipmentSlots.map(slot => (
+      {bagSlots.map(slot => (
         <EquipmentSlot
           key={slot}
           id={slot}
@@ -35,16 +35,6 @@ export function DummyBagOfHolding({ draggables, onUpdateItem }: DummyBagOfHoldin
           onUpdateItem={onUpdateItem}
         />
       ))}
-
-      {/* Render draggable items already occupying a slot */}
-      {equipmentSlots.map(slot => {
-        const item = draggables.find(d => d.parent === slot);
-        return item ? (
-          <Draggable key={item.id} id={item.id}>
-            <DraggableItemView item={item} onUpdateItem={onUpdateItem} />
-          </Draggable>
-        ) : null;
-      })}
     </div>
   );
 }

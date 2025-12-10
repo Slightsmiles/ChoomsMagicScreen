@@ -30,7 +30,8 @@ function App() {
     { id: "HoD", name: "Helmet Of Doom", slot: "head", parent: null },
     { id: "HoMD", name: "Helmet Of MORE DOOM", slot: "head", parent: null },
     { id: "GoD", name: "Glasses of Doom", slot: "eyes", parent: null },
-    { id: "PENIS", name: "Glasses of Penis", slot: "misc", parent: null }
+    { id: "MiscItem", name: "Misc of yeet", slot: "misc", parent: null },
+    { id: "weapMain", name: "one handed salami", slot: "weapon", parent: null}
   ]);
 
 
@@ -39,7 +40,7 @@ function App() {
       const res = await fetch(backendUrl + "equipment")
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const data = await res.json()
-      setItems(data) // <-- data is already the array
+      setItems(data) 
     } catch (err: any) {
       setError(err.message)
     }
@@ -51,7 +52,7 @@ function App() {
       if (!res.ok) throw new Error(` HTTP ${res.status}`)
       const data = await res.json()
       console.log(data)
-      setItems([data]) // <-- wrap single item in array so map works
+      setItems([data]) 
     } catch (err: any) {
       setError(err.message)
     }
