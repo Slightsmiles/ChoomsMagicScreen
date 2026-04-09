@@ -1,9 +1,9 @@
 /* DraggableItemView.module.css */
 .item {
   position: relative; 
-  min-width: 20px;        /*Magic numbering */
-  min-height: 20px;     /*Magic numbering */
-  max-width: 40px;    /*Magic numbering */
+  min-width: 10px;        /*Magic numbering */
+  min-height: 10px;     /*Magic numbering */
+  max-width: 50px;
   padding: 10px;      
   z-index: 10;        /* to float above other siblings */
   display: flex;
@@ -11,6 +11,7 @@
   justify-content: center;
   text-align: center;
   box-sizing: border-box; /* ensure padding included in size */
+  font-size: clamp(0.55rem, 1vw, 0.8rem);
 }
 .slotItemOverlay .item {
   width: 100%;
@@ -21,6 +22,8 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-size: clamp(0.55rem, 1vw, 0.8rem);
+  
 }
 .hovered {
   transform: scale(1.1);         

@@ -17,3 +17,16 @@
   font-size: 0.9rem;
 }
 
+.bagSlot {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid gray;
+  padding: 0;         /* remove extra padding */
+  box-sizing: border-box; /* include border in width/height */
+  overflow: hidden;   /* constrain items inside */
+  
+}

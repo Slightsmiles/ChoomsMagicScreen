@@ -4,6 +4,7 @@ import Draggable from "../../hooks/Draggable";
 import type { DraggableItem } from "../../types/DraggableItem";
 import type { EquipmentSlotId } from "../../types/EquipmentState";
 
+
 interface DummyBagOfHoldingProps {
   draggables: DraggableItem[];
   onUpdateItem: (id: string, updates: Partial<DraggableItem>) => void;
@@ -23,16 +24,18 @@ export function DummyBagOfHolding({ draggables, onUpdateItem }: DummyBagOfHoldin
         gridTemplateColumns: `repeat(${cols}, 60px)`,
         gridTemplateRows: `repeat(${rows}, 60px)`,
         gap: "2px"
+
       }}
     >
       {/* Render empty slots */}
       {bagSlots.map(slot => (
         <EquipmentSlot
-          key={slot}
+          key={slot} 
           id={slot}
           slotId="bag"
           item={draggables.find(item => item.parent === slot) || null}
           onUpdateItem={onUpdateItem}
+          className="styles.bagSlot"
         />
       ))}
     </div>

@@ -11,9 +11,10 @@ interface EquipmentSlotProps {
   id: string;  // Unique identifier
   item: DraggableItem | null; // Contained item
   onUpdateItem: (id: string, updates: Partial<DraggableItem>) => void;
+  className?: string;
 }
 
-export default function EquipmentSlot({ slotId: type, id, item, onUpdateItem }: EquipmentSlotProps) {
+export default function EquipmentSlot({id, item, onUpdateItem, slotId }: EquipmentSlotProps) {
   const { isOver, setNodeRef } = useDroppable({ id });
 
   const backgroundColor = item ? "lightblue" : isOver ? "lightgreen" : "white";
@@ -22,7 +23,7 @@ export default function EquipmentSlot({ slotId: type, id, item, onUpdateItem }: 
   return (
     <div
       ref={setNodeRef}
-      className={styles.slot}
+     className={`${styles.slot} ${slotId === "bag" ? styles.bagSlot : ""}`}
       style={{ backgroundColor }}
     >
      {/*Condtionally renders the slot type if no item is present*/}
