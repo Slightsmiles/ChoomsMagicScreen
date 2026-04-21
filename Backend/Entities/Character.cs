@@ -17,6 +17,8 @@ namespace Backend.Entities
 
         public int Level {get; set;}
 
+        public CharacterStats Stats { get; set; } = null!;
+
         // Navigation 
          public ICollection<Inventory> Inventory { get; set; } = new List<Inventory>();
          public ICollection<Equipment> Equipment { get; set; } = new List<Equipment>();

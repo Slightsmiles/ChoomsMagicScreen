@@ -20,6 +20,8 @@ namespace Backend.Data
         public DbSet<Equipment> Equipment => Set<Equipment>();
         public DbSet<EquipmentSlot> EquipmentSlots => Set<EquipmentSlot>();
 
+        public DbSet<CharacterClass> characterClasses => Set<CharacterClass>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -61,6 +63,16 @@ namespace Backend.Data
                 .WithMany(c => c.Equipment)
                 .HasForeignKey(e => e.CharacterId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Character>()
+                .HasOne(c => c.Stats)
+                .WithOne(s => s.Character)
+                .HasForeignKey<CharacterStats>(s => s.CharacterId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CharacterStats>()
+                .HasIndex(cs => cs.CharacterId)
+                .IsUnique();
         }
     }
 }
