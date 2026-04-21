@@ -20,7 +20,7 @@ namespace Backend.Data
         public DbSet<Equipment> Equipment => Set<Equipment>();
         public DbSet<EquipmentSlot> EquipmentSlots => Set<EquipmentSlot>();
 
-        public DbSet<CharacterClass> characterClasses => Set<CharacterClass>();
+        public DbSet<CharacterStats> CharacterStats => Set<CharacterStats>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
