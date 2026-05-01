@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using Backend.Application.DTOs;
+using Backend.Application.Interfaces;
 
 namespace Backend.Application.Services
 {
 
 
-    public class EquipmentService
+    public class EquipmentService : IEquipmentService
     {
         private readonly HttpClient _http;
 
@@ -34,6 +35,7 @@ namespace Backend.Application.Services
             }
 
         }
+
 
         public async Task<EquipmentDTO?> GetOneEquipmentAsync(string index)
         {

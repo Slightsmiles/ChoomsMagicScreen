@@ -1,6 +1,7 @@
 using Backend.Application.Services;
 using Microsoft.EntityFrameworkCore;
 using Backend.Data;
+using Backend.Application.Interfaces;
 using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +30,14 @@ builder.Services.AddHttpClient("DndApi", c =>
 {
     c.BaseAddress = new Uri("https://www.dnd5eapi.co/api/2014/");
 });
-builder.Services.AddTransient<EquipmentService>();
+builder.Services.AddScoped<IEquipmentService, EquipmentService>();
+builder.Services.AddHttpClient("Open5EApi", c =>
+{
+    c.BaseAddress = new Uri("https://api.open5e.com/v2/");
+});
+builder.Services.AddScoped<IRaceService, RaceService>();
+
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();

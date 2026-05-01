@@ -23,7 +23,7 @@ public class CharactersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateCharacter(CreateCharacterDto dto)
+    public async Task<IActionResult> CreateCharacter(CreateCharacterDTO dto)
     {
         var race = await _raceService.GetOrCreateRace(dto.RaceApiIndex);
         var cls = await _classService.GetOrCreateClass(dto.ClassApiIndex);
