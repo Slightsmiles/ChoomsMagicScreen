@@ -19,6 +19,8 @@ import { DummyBagOfHolding } from './components/DummyBagOfHolding/DummyBagOfHold
 import type { EquipmentState } from './types/EquipmentState'
 import type { DraggableItem } from './types/DraggableItem'
 import { EquipmentSlots } from './types/EquipmentSlots'
+import CharacterForm from "./features/CharacterCreations/CharacterForm";
+
 
 function App() {
   const [items, setItems] = useState<any[]>([])
@@ -94,7 +96,9 @@ function App() {
   return (
     <>
 
-      <div className="card">
+      {<div>
+        <CharacterForm/>
+      </div>/* <div className="card">
 
         <button onClick={loadAllEquipment} style={{ marginTop: '1rem' }}>
           Load Equipment
@@ -129,7 +133,7 @@ function App() {
             )
           } />
 
-      </DndContext>
+      </DndContext> */}
 
 
     </>

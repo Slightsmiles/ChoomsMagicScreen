@@ -19,10 +19,10 @@ builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: "MyAllowLocalHostFrontend",
+    options.AddPolicy(name: "AngularPolicy",
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:5173"
+                          policy.WithOrigins("http://localhost:4200"
                                             );
                       });
 });
@@ -41,7 +41,7 @@ builder.Services.AddScoped<IRaceService, RaceService>();
 var app = builder.Build();
 
 app.UseHttpsRedirection();
-app.UseCors("MyAllowLocalHostFrontend");
+app.UseCors("AngularPolicy");
 app.MapControllers();
 
 // Configure the HTTP request pipeline.
