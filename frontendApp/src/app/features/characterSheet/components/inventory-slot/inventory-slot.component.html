@@ -1,0 +1,10 @@
+
+<div class="slot">
+    @if (item) {
+    <img [src]="item.icon" />
+    <span> {{item.name}} </span>
+    <span>x{{item.quantity}}</span>
+    } @else {
+    <div> Empty Slot</div>
+    }
+</div>
