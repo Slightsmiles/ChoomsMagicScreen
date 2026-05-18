@@ -20,10 +20,10 @@ namespace Backend.Application.Services
         }
 
         
-        public async Task<List<RaceDTO>> GetAllRaces()
-        {
-           try            
+        // public async Task<List<RaceDTO>> GetAllRaces()
+        // {
+        //    try            
             
-        }
+        // }
     }
 }
