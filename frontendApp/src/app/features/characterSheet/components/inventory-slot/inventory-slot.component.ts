@@ -12,4 +12,6 @@ import { Item } from "../../../../shared/types/item";
 export class InventorySlot{
 
     @Input() item: Item | null = null;
+    
+
 }
